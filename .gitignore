@@ -1,0 +1,15 @@
+*
+!/.editorconfig
+!/.gitignore
+!/.tack/
+!/.tack/**
+!/.taplo.toml
+!/LICENSE
+!/README.md
+!/extension/
+!/extension/**
+!/flake.nix
+!/host/
+!/host/**
+!/.github/
+!/.github/**

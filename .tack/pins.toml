@@ -1,0 +1,5 @@
+[tack]
+recomposable = true
+
+[inputs.nixpkgs]
+url = "github:nixos/nixpkgs/nixpkgs-unstable"

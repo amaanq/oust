@@ -1,0 +1,48 @@
+name: release
+
+on:
+  push:
+    branches: [main]
+    paths: [extension/**]
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+
+      - name: Pack
+        env:
+          CRX_KEY_BASE64: ${{ secrets.CRX_KEY_BASE64 }}
+        run: |
+          umask 077
+          base64 -d <<< "$CRX_KEY_BASE64" > "$RUNNER_TEMP/key.pem"
+          go run github.com/mediabuyerbot/go-crx3/crx3@v1.7.1 pack extension --pem "$RUNNER_TEMP/key.pem" --outfile oust.crx
+          rm "$RUNNER_TEMP/key.pem"
+
+      - name: Write the update manifest
+        run: |
+          id=$(go run github.com/mediabuyerbot/go-crx3/crx3@v1.7.1 id oust.crx)
+          version=$(jq -r .version extension/manifest.json)
+          cat > updates.xml <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <gupdate xmlns="http://www.google.com/update2/response" protocol="2.0">
+            <app appid="$id">
+              <updatecheck codebase="https://github.com/${{ github.repository }}/releases/latest/download/oust.crx" version="$version"/>
+            </app>
+          </gupdate>
+          EOF
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload latest oust.crx updates.xml --clobber ||
+            gh release create latest oust.crx updates.xml --title latest --notes "Built from ${{ github.sha }}"

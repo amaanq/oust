@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Oust",
+  "version": "0.2.0",
+  "description": "Throws links that leave a web app's scope out to the system URL handler.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr5z7aOi/hAQCeCcdtK9Q3t9d7YkNr38toT9qIeBdLGK+/Hdnjy34VoK2pss7CqymsCvQ6jnCXmW9Ag85EFEwvs78Xeqf3TLevxgkldsRU/z6wBM5kG4uRukZAPj+nQJSPoGmg4MzFxXDgzgjRgXCaZEYDFbILS+0eDGaeLWuVQY+6mpiVaz3nMjdkuBonRFzm0hsZDyGqadXJWjO8Y2LWLQHmnDS6rG7AaY8yO5rFFlMkoeckVVVFabv7TSwYRiYWs0aI+ENbDgLFFmdhpCUhxqJ2VvmM+h5+6/5ZytmjEAVJV6ikP6gS2hRoD0UlR2IOrzMzDY+iuUrsQJRuakXxQIDAQAB",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "nativeMessaging"
+  ]
+}
