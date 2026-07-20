@@ -1,0 +1,13 @@
+{
+  "$declared": {
+    "nixpkgs": "github:nixos/nixpkgs/nixpkgs-unstable"
+  },
+  "nixpkgs": {
+    "type": "github",
+    "owner": "nixos",
+    "repo": "nixpkgs",
+    "rev": "c9fe7d12cd78d1adcd12dd15e24432dde5b155a0",
+    "narHash": "sha256-5AIVFLRcx8YAwbFTVPTs7YhwJH7JyHfAQsvXmpovcXI=",
+    "lastModified": 1790769526
+  }
+}
